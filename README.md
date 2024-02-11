@@ -6,21 +6,25 @@ Install the dependencies using `npm i` command.
 
 In the project directory, you can run:
 
-### `npm start:dev`
+### `npm run start:dev`
 
 Runs the app in the development mode.\
 Send requests to [http://localhost:4000](http://localhost:4000) to start using the API.
 
-### `npm start:prod`
+### `npm run start:prod`
 
 Runs the app in the production mode.\
 Send requests to [http://localhost:4000](http://localhost:4000) to start using the API.
 
-### `npm start:multi`
+### `npm run start:multi`
 
 Runs the app in the development mode with the Load Balancer.\
 The Load Balancer is running on the port 4000 and all workers are running on the ports starting from 4001 to (whatever number of parallel processes your machine supports). The Load Balancer is implemented using Round Robin technique.\
 Send requests to [http://localhost:4000](http://localhost:4000) to start using the API.
+
+### `npm test`
+
+Runs unit tests.
 
 ## Scope
 
