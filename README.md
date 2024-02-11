@@ -31,13 +31,13 @@ Send requests to [http://localhost:4000](http://localhost:4000) to start using t
 [x] PUT api/users/{userId} implemented properly\
 [x] DELETE api/users/{userId} implemented properly\
 [x] Users are stored in the form described in the technical requirements\
-[x] Value of port on which application is running is stored in .env file\
+[x] Value of port on which application is running is stored in .env file
 ### Advanced Scope
 [x] Task implemented on Typescript\
 [x] Processing of requests to non-existing endpoints implemented properly\
 [x] Errors on the server side that occur during the processing of a request should be handled and processed properly\
 [x] Development mode: npm script start:dev implemented properly\
-[x] Production mode: npm script start:prod implemented properly\
+[x] Production mode: npm script start:prod implemented properly
 ### Hacker Scope
 [x] There are tests for API (not less than 3 scenarios)\
-[x] There is horizontal scaling for application with a load balancer\
+[x] There is horizontal scaling for application with a load balancer
