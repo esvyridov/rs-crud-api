@@ -12,8 +12,8 @@ describe('API', () => {
                 .expect(200, [])
                 .then((res) => {
                     expect(res.body).toEqual([]);
-                })
-        })
+                });
+        });
     });
     
     describe('POST /api/users', () => {

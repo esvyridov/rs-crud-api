@@ -10,7 +10,7 @@ export function getServer(db: DB) {
         try {
             const { pathname } = new URL(req.url!, `http://${req.headers.host}`);
     
-            if (req.url === '/api/users') {
+            if (pathname === '/api/users') {
                 if (req.method === 'GET') {
                     return getUsers(db)(req, res);
                 } else if (req.method === 'POST') {

@@ -10,8 +10,8 @@ export type DB = {
         add: (user: User) => void;
         update: (id: string, data: any) => User | undefined;
         delete: (id: string) => void;
-    }
-}
+    },
+};
 
 export function createDB(): DB {
     return {
@@ -53,7 +53,7 @@ export function createDB(): DB {
                 }
 
                 this._data = [...this._data.slice(0, index), ...this._data.slice(index + 1)];
-            }
-        }
-    }
-}
+            },
+        },
+    };
+};
