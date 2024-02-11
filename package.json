@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest --silent",
     "start:dev": "ts-node-dev src/index.ts",
-    "start:prod": "webpack && node dist/index.js"
+    "start:prod": "webpack && node dist/index.js",
+    "start:multi": "ts-node-dev src/multi.ts"
   },
   "author": "",
   "license": "ISC",
