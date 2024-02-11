@@ -23,8 +23,11 @@ export function getServer(db: DB) {
                 const isIdValid = validate(id) && version(id) === 4;
         
                 if (!isIdValid) {
-                    res.writeHead(400, { 'Content-Type': 'text/plain' });
-                    res.end('Provided userId is not valid.');
+                    res.writeHead(400, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({
+                        ok: false,
+                        error: 'Provided userId is not valid.'
+                    }));
                     return;
                 }
         
@@ -37,11 +40,17 @@ export function getServer(db: DB) {
                 }
             }
         
-            res.writeHead(404, { 'Content-Type': 'text/plain' });
-            res.end('Requested endpoint is not found');
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({
+                ok: false,
+                error: "Endpoint doesn't exist."
+            }));
         } catch (err) {
-            res.writeHead(500, { 'Content-Type': 'text/plain'});
-            res.end('Something went wrong');
+            res.writeHead(500, { 'Content-Type': 'application/json'});
+            res.end(JSON.stringify({
+                ok: false,
+                error: 'Internal server error.'
+            }));
         }
     }
 }

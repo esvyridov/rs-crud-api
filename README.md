@@ -30,9 +30,46 @@ Runs unit tests.
 
 [x] The repository with the application contains a Readme.md file containing detailed instructions for installing, running and using the application\
 [x] GET api/users implemented properly\
+Expected response body is
+```json
+{
+    "ok": true,
+    "data": {
+        "users": [...],
+    }
+}
+```
+
 [x] GET api/users/{userId} implemented properly\
+Expected response body is
+```json
+{
+    "ok": true,
+    "data": {
+        "user": {...},
+    }
+}
+```
 [x] POST api/users implemented properly\
+Expected response body is
+```json
+{
+    "ok": true,
+    "data": {
+        "user": {...},
+    }
+}
+```
 [x] PUT api/users/{userId} implemented properly\
+Expected response body is
+```json
+{
+    "ok": true,
+    "data": {
+        "user": {...},
+    }
+}
+```
 [x] DELETE api/users/{userId} implemented properly\
 [x] Users are stored in the form described in the technical requirements\
 [x] Value of port on which application is running is stored in .env file
