@@ -254,7 +254,90 @@ describe('API', () => {
                         error: 'Provided userId is not valid.',
                     })
                 })
-        })
+        });
+
+        describe('Returns Content-Type: application/json, status 400 with error message', () => {
+            test('when username is not a string', async () => {
+                const { body } = await request(server)
+                    .post('/api/users')
+                    .send({
+                        username: 'Bob',
+                        age: 54,
+                        hobbies: ['Books']
+                    })
+            
+                return request(server)
+                    .put(`/api/users/${body.data.user.id}`)
+                    .send({
+                        username: 918,
+                    })
+                    .expect('Content-Type', 'application/json')
+                    .expect(400)
+                    .then((res) => {
+                        expect(res.body).toEqual({
+                            ok: false,
+                            error: 'Provided user is not valid.',
+                            errors: {
+                                username: 'Field username is not a string.',
+                            }
+                        })
+                    })
+            });
+    
+            test('when age is not a number', async () => {
+                const { body } = await request(server)
+                    .post('/api/users')
+                    .send({
+                        username: 'Bob',
+                        age: 54,
+                        hobbies: ['Books']
+                    })
+            
+                return request(server)
+                    .put(`/api/users/${body.data.user.id}`)
+                    .send({
+                        age: '18',
+                    })
+                    .expect('Content-Type', 'application/json')
+                    .expect(400)
+                    .then((res) => {
+                        expect(res.body).toEqual({
+                            ok: false,
+                            error: 'Provided user is not valid.',
+                            errors: {
+                                age: 'Field age is not a number.',
+                            }
+                        })
+                    })
+            });
+    
+            test('when hobbies are not an array', async () => {
+                const { body } = await request(server)
+                    .post('/api/users')
+                    .send({
+                        username: 'Bob',
+                        age: 54,
+                        hobbies: ['Books']
+                    })
+            
+                return request(server)
+                    .put(`/api/users/${body.data.user.id}`)
+                    .send({
+                        hobbies: 'Sport',
+                    })
+                    .expect('Content-Type', 'application/json')
+                    .expect(400)
+                    .then((res) => {
+                        expect(res.body).toEqual({
+                            ok: false,
+                            error: 'Provided user is not valid.',
+                            errors: {
+                                hobbies: 'Field hobbies is not an array.',
+                            }
+                        })
+                    })
+            });
+        });
     
         test('Returns Content-Type: application/json, status 404 with error if userId is not found', async () => {
             return request(server)

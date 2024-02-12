@@ -40,7 +40,7 @@ export function createDB(): DB {
                 }
 
                 user.username = typeof data.username === 'string' ? data.username : user.username;
-                user.age = data.age === 'number' ? data.age : user.age;
+                user.age = typeof data.age === 'number' ? data.age : user.age;
                 user.hobbies = Array.isArray(data.hobbies) ? data.hobbies : user.hobbies;
 
                 return user;

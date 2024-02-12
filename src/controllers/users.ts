@@ -87,18 +87,42 @@ export function putUser(db: DB, id: string) {
             return;
         }
 
-        const body = await readRequestBody(req);
-        const updatedUser = db.users.update(id, body);
+        const body = await readRequestBody<UserDTO>(req);
+        let errors: Record<string, string> = {};
 
-        cluster.isWorker && process.send?.({ type: 'updateUsers', users: db.users.getAll() });
+        if (typeof body.username !== 'undefined' && typeof body.username !== 'string') {
+            errors.username = 'Field username is not a string.';
+        }
 
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-            ok: true,
-            data: {
-                user: updatedUser
-            }
-        }));
+        if (typeof body.age !== 'undefined' && typeof body.age !== 'number') {
+            errors.age = 'Field age is not a number.';
+        }
+
+        if (typeof body.hobbies !== 'undefined' && !Array.isArray(body.hobbies)) {
+            errors.hobbies = 'Field hobbies is not an array.';
+        }
+
+        if (Object.keys(errors).length === 0) {
+            const updatedUser = db.users.update(id, body);
+
+            cluster.isWorker && process.send?.({ type: 'updateUsers', users: db.users.getAll() });
+    
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({
+                ok: true,
+                data: {
+                    user: updatedUser
+                }
+            }));
+            return
+        } else {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({
+                ok: false,
+                error: 'Provided user is not valid.',
+                errors,
+            }));
+        }
     }
 }
 
